@@ -1,0 +1,18 @@
+{% extends "taskapp/base1.html" %}
+
+
+{% block content %}
+<h2></h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Зарегистрироваться">
+</form>
+    <form action="{% url 'login' %}" method="get">
+        <input type="submit" value="На страницу авторизации">
+    </form>
+    <form action="{% url 'home' %}" method="get">
+        <input type="submit" value="На главную страницу">
+    </form>
+{% endblock %}

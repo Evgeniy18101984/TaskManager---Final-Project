@@ -1,0 +1,62 @@
+{% extends 'taskapp/base1.html' %}
+
+{% block content %}
+        <div style="grid-column: 3">
+            {% if user.is_authenticated %}
+            {% else %}
+            <meta http-equiv='refresh' content='0; URL=http://127.0.0.1:8000/login/'>
+            {% endif %}
+        </div>
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-menu">
+        <div class="navbar-start">
+        	<a class="navbar-item" href="../project/create"> Создать проект </a>
+        </div>
+    </div>
+</nav>
+    <section class="section">
+        <table class="table is-hoverable is-fullwidth">
+            <thead>
+            <tr>
+                <th>Тема</th>
+                <th>Описание</th>
+                <th>Дата создания</th>
+                <th>Дата выполнения</th>
+                <th>Автор</th>
+                <th>Исполнитель</th>
+                <th>Изменить</th>
+                <th>Удалить</th>
+            </tr>
+            </thead>
+            {% for project in project_ %}
+                <tr>
+                    <td>
+                        {{ project.title }}
+                    </td>
+                    <td>
+                        {{ project.description }}
+                    </td>
+                    <td>
+                        {{ project.created }}
+                    </td>
+                    <td>
+                        {{ project.completed }}
+                    </td>
+                    <td>
+                        {{ project.author }}
+                    </td>
+                    <td>
+                        {{ project.performer }}
+                    </td>
+                    <td>
+                        <a href="{% url 'edit' project.pk %}" type="button" class="btn btn-secondary btn-sm">Изменить</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete' project.pk %}" type="button" class="btn btn-secondary btn-sm">Удалить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </section>
+
+{% endblock %}
