@@ -1,0 +1,73 @@
+{% extends 'taskapp/base1.html' %}
+
+{% block content %}
+        <div style="grid-column: 3">
+            {% if user.is_authenticated %}
+            {% else %}
+            <meta http-equiv='refresh' content='0; URL=http://127.0.0.1:8000/login/'>
+            {% endif %}
+        </div>
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-menu">
+        <div class="navbar-start">
+        	<a class="navbar-item" href="../task/create"> Создать задачу </a>
+        </div>
+     </div>
+</nav>
+    <section class="section">
+        <table class="table is-hoverable is-fullwidth">
+            <thead>
+            <tr>
+                <th>Тема</th>
+                <th>Описание</th>
+                <th>Статус</th>
+                <th>Спринт</th>
+                <th>Дата создания</th>
+                <th>Контрольный срок</th>
+                <th>Дата выполнения</th>
+                <th>Автор</th>
+                <th>Исполнитель</th>
+                <th>Изменить</th>
+                <th>Удалить</th>
+            </tr>
+            </thead>
+            {% for task in task_ %}
+                <tr>
+                    <td>
+                        {{ task.title }}
+                    </td>
+                    <td>
+                        {{ task.description }}
+                    </td>
+                    <td>
+                        {{ task.status }}
+                    </td>
+                    <td>
+                        {{ task.sprint }}
+                    </td>
+                    <td>
+                        {{ task.created }}
+                    </td>
+                    <td>
+                        {{ task.deadline }}
+                    </td>
+                    <td>
+                        {{ task.completed }}
+                    </td>
+                    <td>
+                        {{ task.author }}
+                    </td>
+                    <td>
+                        {{ task.performer }}
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_task' task.pk %}" type="button" class="btn btn-secondary btn-sm">Изменить</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_task' task.pk %}" type="button" class="btn btn-secondary btn-sm">Удалить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </section>
+{% endblock %}

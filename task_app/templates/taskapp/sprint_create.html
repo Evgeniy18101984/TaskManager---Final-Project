@@ -1,0 +1,14 @@
+{% extends 'taskapp/base1.html' %}
+
+{% block content %}
+        <div style="grid-column: 3">
+            {% if user.is_authenticated %}
+            {% else %}
+            <meta http-equiv='refresh' content='0; URL=http://127.0.0.1:8000/login/'>
+            {% endif %}
+        </div>
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Создать спринт">
+    </form>
+{% endblock content %}

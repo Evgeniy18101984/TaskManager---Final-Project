@@ -1,0 +1,18 @@
+{% extends 'taskapp/base1.html' %}
+
+{% block content %}
+        <div style="grid-column: 3">
+            {% if user.is_authenticated %}
+            {% else %}
+            <meta http-equiv='refresh' content='0; URL=http://127.0.0.1:8000/login/'>
+            {% endif %}
+        </div>
+    <h2>
+        Вы действительно хотите удалить спринт?
+    </h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Да">
+    </form>
+    <input value="Нет" type="button" onclick="location.href='{% url "home_sprint" %}';">
+{% endblock content %}
